@@ -1,9 +1,13 @@
 package com.INTIA.INTIA.assurance.Controllers;
 
 import ch.qos.logback.core.net.server.Client;
+import com.INTIA.INTIA.assurance.Entities.Assurance;
 import com.INTIA.INTIA.assurance.Entities.Client_;
 import com.INTIA.INTIA.assurance.Services.ClientService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,5 +46,11 @@ public class ClientController {
     @DeleteMapping("/{id}")
     public void deleteClient(@PathVariable Long id) {
         clientService.deleteClient(id);
+    }
+
+    @GetMapping("/assurances")
+    public ResponseEntity<List<Assurance>> getAssuranceOfClient(Client client){
+        List<Assurance> assuranceListOfClient = clientService.assuranceOfClient(client);
+        return new ResponseEntity<>(assuranceListOfClient, HttpStatus.OK);
     }
 }

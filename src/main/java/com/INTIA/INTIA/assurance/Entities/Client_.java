@@ -1,5 +1,6 @@
 package com.INTIA.INTIA.assurance.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -25,6 +28,8 @@ public class Client_ implements Serializable {
     @ManyToOne
     @JoinColumn(name = "branche_id")
     private Branche branche;
-
+    @JsonIgnoreProperties("utilisateur")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Assurance> assuranceList = new ArrayList<>();
 
 }

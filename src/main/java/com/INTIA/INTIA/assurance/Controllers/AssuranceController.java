@@ -3,6 +3,8 @@ package com.INTIA.INTIA.assurance.Controllers;
 import com.INTIA.INTIA.assurance.Entities.Assurance;
 import com.INTIA.INTIA.assurance.Services.AssuranceService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,5 +44,10 @@ public class AssuranceController {
     @DeleteMapping("/{id}")
     public void deleteAssurance(@PathVariable Long id) {
         assuranceService.deleteAssurance(id);
+    }
+
+    public ResponseEntity<?> addAssuranceToClient(@PathVariable Long idClient, @PathVariable Long idAssurance){
+        assuranceService.addAssuranceToclient(idClient, idAssurance);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

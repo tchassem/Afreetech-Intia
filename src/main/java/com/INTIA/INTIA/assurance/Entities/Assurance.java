@@ -1,5 +1,6 @@
 package com.INTIA.INTIA.assurance.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,8 +23,8 @@ public class Assurance implements Serializable {
     private LocalDate dateDebut;
     private LocalDate dateFin;
     private Double montant;
-
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
     private Client_ client;
 }
